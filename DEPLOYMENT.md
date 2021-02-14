@@ -21,7 +21,7 @@ VII)  PHP-FPM         : Application Server ( FastCGI Process Manager )
 VIII) Nginx           : Web Server ( FASTCGI_CACHE & Lossless Compression )
 IX)   Caddy           : Reverse Proxy ( HTTP/3 | TLS Management | Application Firewall  )
 X)    CloudFlare      : Content Distribution Network ( CDN )
-XI)    Portainer       : Container Management UI
+XI)   Portainer       : Container Management UI
 ```
 
 ### Table of Content
