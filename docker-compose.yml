@@ -3,11 +3,18 @@ version: '3.7'
 services:
   caddy:
     container_name: Reverse_Proxy
-    image: caddy:${CADDY_VERSION}
+    image: techwise-technologies/caddy:${CADDY_VERSION}
+    build:
+      context: .
+      dockerfile: ./caddy/Dockerfile
     volumes:
       - ${CADDYFILE}:/etc/caddy/Caddyfile
       - ${CADDY_DATA_DIR}:/data
       - ${CADDY_CONF_DIR}:/config
+    environment:
+      - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL}
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_AUTH_TOKEN}
+      - ACME_AGREE=true
     ports:
       - "80:80"
       - "443:443"

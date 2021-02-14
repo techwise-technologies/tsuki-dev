@@ -5,7 +5,7 @@
 
 Desired Outcome of this Document is a Deployment of a Stack of Docker Containers providing a Production Backend that serves a WordPress Application via the FastCGI Application Server to the Web Server with built in FastCGI Cache & Lossless Compression. 
 
-The Reverse Proxy Performs Secure Domain Name Validation, Auto TLS Management & Provides A Web Application Firewall. 
+The Reverse Proxy Performs Secure Domain Name Validation, Auto TLS Management & Provides A Web Application Firewall along with CloudFlare as CDN.
 
 Automation & Orchestration by Docker-Compose. Developer / Admin UI by Portainer.
 
@@ -20,7 +20,8 @@ VI)   WordPress 5.6   : Content Management System ( CMS )
 VII)  PHP-FPM         : Application Server ( FastCGI Process Manager )
 VIII) Nginx           : Web Server ( FASTCGI_CACHE & Lossless Compression )
 IX)   Caddy           : Reverse Proxy ( HTTP/3 | TLS Management | Application Firewall  )
-X)    Portainer       : Container Management UI
+X)    CloudFlare      : Content Distribution Network ( CDN )
+XI)    Portainer       : Container Management UI
 ```
 
 ### Table of Content
@@ -50,14 +51,14 @@ X)    Portainer       : Container Management UI
 * OS: Linux (Debian 10) with Root Privileges
 * Docker and Docker-Compose installed on the host machine
 * A Fully Qualified Domain Name (FQDN)
-* An 'A DNS Record' with your FQDN pointing to your server’s public IP address
+* Cloudflare "Orange-Cloud" DNS Record with your FQDN pointing to your server’s public IP address
 
 ### Preparation
 
 
 * [Register a Fully Qualified Domain Name (FQDN)](https://www.namecheap.com/support/knowledgebase/article.aspx/10072/35/how-to-register-a-domain-name)
 
-* [Create An 'A DNS Record'](https://www.namecheap.com/support/knowledgebase/article.aspx/319/2237/how-can-i-set-up-an-a-address-record-for-my-domain)
+* [Create "Orange-Cloud" DNS Records](https://www.namecheap.com/support/knowledgebase/article.aspx/9607/2210/how-to-set-up-dns-records-for-your-domain-in-cloudflare-account/)
 
 
 SSH into the host machine : 
@@ -121,21 +122,26 @@ Example `.env` file (default values):
 # Caddy v2
 CADDY_CONF_DIR=./caddy/config
 CADDY_DATA_DIR=./caddy/data
-CADDYFILE=./Caddyfile
+CADDYFILE=./caddy/Caddyfile
 CADDY_VERSION=2-alpine
+
+# Cloudflare
+# CloudFlare 
+CLOUDFLARE_EMAIL=email@yourdomain.com
+CLOUDFLARE_AUTH_TOKEN=cloudflare_api_token
 
 # Nginx
 NGINX_CONF_DIR=./nginx/conf.d
 NGINX_LOG_DIR=./logs/nginx
 FASTCGI_CACHE_DIR=./cache
-NGINX_VERSION=stable
+NGINX_VERSION=prod
 
 # PHP Configs
-TSUKI_PHP_CONF=./uploads.ini
+TSUKI_PHP_CONF=./tsuki.ini
 
 # WordPress
 WORDPRESS_DB_PASSWORD=strong_password      <------------ EDIT THIS
-WORDPRESS_VERSION=php7.4-fpm              
+WORDPRESS_VERSION=php7.4           
 WORDPRESS_DB_NAME=yourdomain_com_wp        <------------ EDIT THIS   ## leave the trailing _wp 
 WORDPRESS_DB_USER=yourdomain_com           <------------ EDIT THIS      
 WORDPRESS_DATA_DIR=./wordpress
@@ -167,7 +173,7 @@ You now have a .env file ready to use for deployment.
 
 ### STEP 3: Create Directories
 
-    mkdir -p cache/ caddy/ mariadb/ wordpress/ logs/nginx/
+    mkdir -p cache/ mariadb/ wordpress/ logs/nginx/
 
 
 ### STEP 4: Configure Caddyfile
@@ -182,19 +188,26 @@ This opens the  Caddyfile with the nano editor and you are now required to input
 }
 
 yourdomain.com, www.yourdomain.com {
-        reverse_proxy 127.0.0.1:8080
+  reverse_proxy 127.0.0.1:8080
+  tls email@yourdomain.com
+  
+  tls {
+    dns cloudflare cloudflare_api_token
+  }
 }
 
 devpanel.yourdomain.com {
-        reverse_proxy 127.0.0.1:9000
+  reverse_proxy 127.0.0.1:9000
+  tls email@yourdomain.com
+  
+  tls {
+    dns cloudflare cloudflare_api_token
+  }
 }
-
 ```
 
-Replace all occurances of "yourdomain.com" with your Desired domain name. 
-Exit the file by pressing and holding ctrl + x. 
-
-This will initiate a prompt that will ask if you wish to save the changes, press Y and Enter. 
+Replace all occurances of "yourdomain.com" with your Desired domain name and all occurances of "email@yourdomain.com" & "cloudflare_api_token" with your own token and email.
+Exit the file by pressing and holding ctrl + x, this will initiate a prompt that will ask if you wish to save the changes, press Y and Enter. 
 
 ### STEP 5: Deployment with Docker-Compose
 

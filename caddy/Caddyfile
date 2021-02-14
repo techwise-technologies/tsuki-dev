@@ -1,0 +1,21 @@
+{
+    experimental_http3
+}
+
+yourdomain.com, www.yourdomain.com {
+  reverse_proxy 127.0.0.1:8080
+  tls email@yourdomain.com
+  
+  tls {
+    dns cloudflare cloudflare_api_token
+  }
+}
+
+devpanel.yourdomain.com {
+  reverse_proxy 127.0.0.1:9000
+  tls email@yourdomain.com
+  
+  tls {
+    dns cloudflare cloudflare_api_token
+  }
+}
