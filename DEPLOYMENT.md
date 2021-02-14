@@ -81,7 +81,8 @@ Confirm Seconday User has SSH access from a new shell :
 * [Install Docker-Compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-debian-10)
 
 Enable Uncomplicated Firewall (UFW) :
-    
+
+    sudo apt install ufw
     sudo ufw allow ssh                        # Delete the ipv6 RULESET If you do not require it
     sudo ufw default deny incoming
     sudo ufw default allow outgoing
