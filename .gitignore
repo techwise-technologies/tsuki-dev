@@ -1,0 +1,3 @@
+# Secret variables (passwords etc):
+.env*
+!.env_example
