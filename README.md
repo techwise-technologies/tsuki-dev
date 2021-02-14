@@ -5,6 +5,8 @@
 
 A Docker-Compose Deployment of a Single Site WordPress Instance Served via PHP-FPM to Nginx utilizing MariaDB as the Backing DataBase with Redis for In-Memory Object Caching; Built on Alpine & Debian Linux.
 
+ Note: [Click here to Go To Deployment Manifest](https://github.com/techwise-technologies/tsuki-webshop/blob/main/deployment.md)
+
 ### Alpine Linux ?
 
 Small. Simple. Secure.
