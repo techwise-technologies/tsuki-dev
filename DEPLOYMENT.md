@@ -177,7 +177,7 @@ You now have a .env file ready to use for deployment.
 
 ### STEP 4: Configure Caddyfile
    
-    nano Caddyfile
+    cd caddy/ && nano Caddyfile
 
 This opens the  Caddyfile with the nano editor and you are now required to input your domain name.
 
