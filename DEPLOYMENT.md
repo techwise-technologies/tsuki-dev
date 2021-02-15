@@ -5,7 +5,7 @@
 
 Desired Outcome of this Document is a Deployment of a Stack of Docker Containers providing a Production Backend that serves a WordPress Application via the FastCGI Application Server to the Web Server with built in FastCGI Cache & Lossless Compression. 
 
-The Reverse Proxy Performs Secure Domain Name Validation, Auto TLS Management & Provides A Web Application Firewall along with CloudFlare as CDN.
+The Reverse Proxy Performs Secure Domain Name Validation, Auto TLS Management & Provides A Web Application Firewall along with CloudFlare CDN.
 
 Automation & Orchestration by Docker-Compose. Developer / Admin UI by Portainer.
 
@@ -20,7 +20,7 @@ VI)   WordPress 5.6   : Content Management System ( CMS )
 VII)  PHP-FPM         : Application Server ( FastCGI Process Manager )
 VIII) Nginx           : Web Server ( FASTCGI_CACHE & Lossless Compression )
 IX)   Caddy           : Reverse Proxy ( HTTP/3 | TLS Management | Application Firewall  )
-X)    CloudFlare      : Content Distribution Network ( CDN )
+X)    CloudFlare      : Content Delivery Network ( CDN )
 XI)   Portainer       : Container Management UI
 ```
 
@@ -55,7 +55,6 @@ XI)   Portainer       : Container Management UI
 
 ### Preparation
 
-
 * [Register a Fully Qualified Domain Name (FQDN)](https://www.namecheap.com/support/knowledgebase/article.aspx/10072/35/how-to-register-a-domain-name)
 
 * [Create "Orange-Cloud" DNS Records](https://www.namecheap.com/support/knowledgebase/article.aspx/9607/2210/how-to-set-up-dns-records-for-your-domain-in-cloudflare-account/)
@@ -80,9 +79,12 @@ Confirm Seconday User has SSH access from a new shell :
 
 * [Install Docker-Compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-debian-10)
 
-Enable Uncomplicated Firewall (UFW) :
+Install Uncomplicated Firewall (UFW) & git : 
 
-    sudo apt install ufw
+    sudo apt install -y ufw git
+
+Enable UFW :
+
     sudo ufw allow ssh                        # Delete the ipv6 RULESET If you do not require it
     sudo ufw default deny incoming
     sudo ufw default allow outgoing
@@ -91,10 +93,6 @@ Enable Uncomplicated Firewall (UFW) :
     sudo systemctl enable ufw
     sudo ufw enable
     sudo ufw status verbose
-
-Install git :
-
-    sudo apt install -y git
 
 ### STEP 1: Clone Repository
 
@@ -109,7 +107,7 @@ The .env file, stored as a hidden file in the main directory, requires your inpu
 
 You now have a .env file. This file contains insecure default values for configuration options. 
 
-During deployment this .env file is used to by YOUR WordPress Application to initialize the configuration files. 
+During deployment this .env file is used by Your WordPress Application to initialize the configuration files. 
 
 The values you input are used for secure authentication between the Services running within the Docker Containers. It is important to keep a copy of the values you input as only you have them.
 
@@ -126,7 +124,6 @@ CADDY_DATA_DIR=./caddy/data
 CADDYFILE=./caddy/Caddyfile
 CADDY_VERSION=2-alpine
 
-# Cloudflare
 # CloudFlare 
 CLOUDFLARE_EMAIL=email@yourdomain.com
 CLOUDFLARE_AUTH_TOKEN=cloudflare_api_token
@@ -164,7 +161,9 @@ DB_DATA_DIR=./mariadb
 MARIADB_VERSION=10.5
 
 ```
-Replace all occurances of "yourdomain_com", "strong_password", "very_strong_password" & "very_very_strong_password" as desired. 
+Replace all occurances of "yourdomain_com", "strong_password", "very_strong_password" & "very_very_strong_password" as desired and all occurances of "email@yourdomain.com" & "cloudflare_api_token" with your own token and email. 
+
+Ensure the token has Zone Edit Permissions for DNS. 
 
 Exit the file by pressing and holding ctrl + x. 
 
@@ -175,7 +174,6 @@ You now have a .env file ready to use for deployment.
 ### STEP 3: Create Directories
 
     mkdir -p cache/ mariadb/ wordpress/ logs/nginx/
-
 
 ### STEP 4: Configure Caddyfile
    
@@ -188,34 +186,36 @@ This opens the  Caddyfile with the nano editor and you are now required to input
     experimental_http3
 }
 
-yourdomain.com, www.yourdomain.com {
+yourdomain.com, www.yourdomain.com {          <------------ EDIT THIS
   reverse_proxy 127.0.0.1:8080
-  tls email@yourdomain.com
+  tls email@yourdomain.com                    <------------ EDIT THIS
   
   tls {
-    dns cloudflare cloudflare_api_token
+    dns cloudflare cloudflare_api_token       <------------ EDIT THIS
   }
 }
 
-devpanel.yourdomain.com {
+devpanel.yourdomain.com {                     <------------ EDIT THIS
   reverse_proxy 127.0.0.1:9000
-  tls email@yourdomain.com
+  tls email@yourdomain.com                    <------------ EDIT THIS
   
   tls {
-    dns cloudflare cloudflare_api_token
+    dns cloudflare cloudflare_api_token       <------------ EDIT THIS
   }
 }
 ```
 
-Replace all occurances of "yourdomain.com" with your Desired domain name and all occurances of "email@yourdomain.com" & "cloudflare_api_token" with your own token and email.
-Exit the file by pressing and holding ctrl + x, this will initiate a prompt that will ask if you wish to save the changes, press Y and Enter. 
+Replace all occurances of "yourdomain.com" with your Desired Domain Name and all occurances of "email@yourdomain.com" & "cloudflare_api_token" with your own token and email.
+
+Exit the file by pressing and holding ctrl + x.
+
+This will initiate a prompt that will ask if you wish to save the changes, press Y and Enter. 
 
 ### STEP 5: Deployment with Docker-Compose
 
 Time to Deploy, Run this Command and Watch the code Execute. It may take a few minutes, be patient.
 
     docker-compose up -d 
-
 
 After a few moments your WordPress Application & Your Admin UI is ready to be configured.
 
@@ -224,7 +224,7 @@ Admin UI :             https://devpanel.yourdomain.com
 
 ### STEP 6: WordPress Installation & Configuration
 
-Go to your domain and Follow the Steps to install WordPress. Keep a Copy of the Username & Password, this shall be the Admin Credentials for the WordPress Application. 
+Go to your Domain and Follow the Steps to install WordPress. Keep a Copy of the Username & Password, this shall be the Admin Credentials for the WordPress Application. 
 
 Log into the WordPress Admin Panel.
 
@@ -258,7 +258,9 @@ Add This at the very Bottom of the file:
     /** Filesystem API Error Fix */
     define('FS_METHOD','direct');
 
-Exit the file by pressing and holding ctrl + x. This will initiate a prompt that will ask if you wish to save the changes, press Y and Enter. 
+Exit the file by pressing and holding ctrl + x. 
+
+This will initiate a prompt that will ask if you wish to save the changes, press Y and Enter. 
 
 ### STEP 8: Activate Plugins
 

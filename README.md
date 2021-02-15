@@ -1,11 +1,11 @@
     
 # Tsuki WebShop Deployment
 
-## Dockerized WordPress 5.6 (PHP 7.4), PHP-FPM, Nginx & Caddy Server Built on Linux
+## Dockerized WordPress 5.6 (PHP 7.4), php-fpm, Nginx & Caddy Server Built on Linux
 
-A Docker-Compose Deployment of a Single Site WordPress Instance Served via PHP-FPM to Nginx utilizing MariaDB as the Backing DataBase with Redis for In-Memory Object Caching; Built on Alpine & Debian Linux.
+A Docker-Compose Deployment of a Single Site WordPress Instance Served via php-fpm to Nginx utilizing MariaDB as the Backing DataBase with Redis for In-Memory Object Caching; Built on Alpine & Debian Linux.
 
- Note: [Click here to Go To Deployment Manifest](https://github.com/techwise-technologies/tsuki-webshop/blob/main/DEPLOYMENT.md)
+ Note: [Click here to Go To Deployment Manual](https://github.com/techwise-technologies/tsuki-webshop/blob/main/DEPLOYMENT.md)
 
 ### Alpine Linux ?
 
@@ -31,7 +31,7 @@ More information at: https://www.debian.org/
 
 ### Docker ? 
 
-Developing apps today requires so much more than writing code. Multiple languages, frameworks, architectures, and discontinuous interfaces between tools for each lifecycle stage creates enormous complexity. 
+Developing apps today requires so much more than writing code. Multiple languages, frameworks, architectures and discontinuous interfaces between tools for each lifecycle stage creates enormous complexity. 
 
 Docker simplifies and accelerates workflow, while giving developers the freedom to innovate with their choice of tools, application stacks, and deployment environments for each project.
 
@@ -45,13 +45,13 @@ More information at: https://github.com/docker/compose
 
 ## CloudFlare ?
 
-CloudFlare Secures and Ensures the Reliability of your External-Facing resources such as Websites, APIs, and Applications. It Protects your Internal resources such as Behind-the-Firewall Applications, Teams, and Devices. And it is your Platform for Developing Globally-Scalable Applications. 
+CloudFlare Secures and Ensures the Reliability of your External-Facing resources such as Websites, APIs, and Applications. It Protects your Internal resources such as Behind-the-Firewall Applications, Teams and Devices. And it is your Platform for Developing Globally-Scalable Applications. 
 
 More information at: https://www.cloudflare.com/
 
 ### Caddy v2?
 
-Caddy v2 is a powerful, enterprise-ready, open source Reverse Proxy with automatic HTTPS written in Go
+Caddy v2 is a powerful, enterprise-ready, open source Reverse Proxy with automatic HTTPS written in Go.
 
 Caddy v2 simplifies your infrastructure. It takes care of TLS Management & Termination, OCSP Stapling, Reverse Proxying & Ingress, Web Application Firewall, Lossless Compression (brotli) and more.
 
@@ -59,13 +59,13 @@ More information at: https://caddyserver.com/
 
 ### Nginx ?
 
-The goal behind Nginx was to Create the Fastest Web Server around, and Maintaining that Excellence is still a Central Goal of the Project. Nginx consistently beats Apache and other Servers in Benchmarks measuring Web Server Performance. Nginx also pairs well with PHP-FPM.
+The goal behind Nginx was to Create the Fastest Web Server around, and Maintaining that Excellence is still a Central Goal of the Project. Nginx consistently beats Apache and other Servers in Benchmarks measuring Web Server Performance. Nginx also pairs well with php-fpm.
 
 More information at: https://www.nginx.com
 
-### PHP-FPM ?
+### php-fpm ?
 
-PHP-FPM (FastCGI Process Manager) is an Alternative PHP FastCGI Application Server with some Additional Features Useful for Websites of Any Size, Especially Busier Websites. 
+php-fpm (FastCGI Process Manager) is an Alternative PHP FastCGI Application Server with some Additional Features Useful for Websites of Any Size, Especially Busier Websites. 
 
 These features include:
 
