@@ -241,7 +241,7 @@ Navigate to the wordpress folder and open the wp-config.php in nano
 
     cd wordpress/ && sudo nano wp-config.php
 
-Add The Following Settings just above the MYSQL entries:
+Add The Following Settings just above the MYSQL Settings :
 
     // ** REDIS settings ** //
     define( 'WP_CACHE_KEY_SALT', 'wp-docker-redis');
