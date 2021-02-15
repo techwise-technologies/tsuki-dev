@@ -239,8 +239,7 @@ Add 2 New Plugins By Till Krüss :
 
 Navigate to the wordpress folder and open the wp-config.php in nano
 
-    cd wordpress/
-    sudo nano wp-config.php
+    cd wordpress/ && sudo nano wp-config.php
 
 Add The Following Settings just above the MYSQL entries:
 
