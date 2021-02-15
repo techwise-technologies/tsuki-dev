@@ -235,8 +235,6 @@ Add 2 New Plugins By Till Krüss :
     I)  Redis Object Cache
     II) Nginx Cache
 
-Before Activating the Plugins, we have one more Step. 
-
 ### STEP 7: Update Wp-Config.Php
 
 Navigate to the wordpress folder and open the wp-config.php in nano
