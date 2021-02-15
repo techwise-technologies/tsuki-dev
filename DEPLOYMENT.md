@@ -267,7 +267,7 @@ In The WordPress Admin UI, Navigate To Plugins and Activate Redis & Nginx Cache.
 
 * Navigate to Nginx Settings and Set the Path to "/tmp/cache"
 
-* Clear Your Cache
+* Purge Cache
 
 ### STEP 9: Portainer Admin UI
 
