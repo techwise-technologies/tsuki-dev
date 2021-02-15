@@ -122,7 +122,7 @@ Example `.env` file (default values):
 CADDY_CONF_DIR=./caddy/config
 CADDY_DATA_DIR=./caddy/data
 CADDYFILE=./caddy/Caddyfile
-CADDY_VERSION=2-alpine
+CADDY_VERSION=2-prod
 
 # CloudFlare 
 CLOUDFLARE_EMAIL=email@yourdomain.com
