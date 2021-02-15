@@ -181,6 +181,8 @@ You now have a .env file ready to use for deployment.
 
 This opens the  Caddyfile with the nano editor and you are now required to input your domain name.
 
+Replace all occurances of "yourdomain.com" with your Desired Domain Name and all occurances of "email@yourdomain.com" & "cloudflare_api_token" with your own token and email.
+
 ```env
 {
     experimental_http3
@@ -204,8 +206,6 @@ devpanel.yourdomain.com {                     <------------ EDIT THIS
   }
 }
 ```
-
-Replace all occurances of "yourdomain.com" with your Desired Domain Name and all occurances of "email@yourdomain.com" & "cloudflare_api_token" with your own token and email.
 
 Exit the file by pressing and holding ctrl + x.
 
