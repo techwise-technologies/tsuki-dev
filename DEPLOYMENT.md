@@ -267,6 +267,8 @@ In The WordPress Admin UI, Navigate To Plugins and Activate Redis & Nginx Cache.
 
 * Navigate to Nginx Settings and Set the Path to "/tmp/cache"
 
+* Clear Your Cache
+
 ### STEP 9: Portainer Admin UI
 
 Navigate to Your DevPanel URL and Folow the Instructions to Create an Admin User. Keep a Copy of the Credentials. Log into the Admin UI.
