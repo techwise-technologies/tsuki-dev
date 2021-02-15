@@ -163,7 +163,7 @@ MARIADB_VERSION=10.5
 ```
 Replace all occurances of "yourdomain_com", "strong_password", "very_strong_password" & "very_very_strong_password" as desired and all occurances of "email@yourdomain.com" & "cloudflare_api_token" with your own token and email. 
 
-Ensure the token has Zone Edit Permissions for DNS. 
+[Ensure the token has Zone Edit Permissions for DNS.](https://sammckenzie.be/en/blog/using-caddy-with-cloudflare/) 
 
 Exit the file by pressing and holding ctrl + x. 
 
