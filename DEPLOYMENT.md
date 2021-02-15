@@ -215,7 +215,7 @@ This will initiate a prompt that will ask if you wish to save the changes, press
 
 Time to Deploy, Run this Command and Watch the code Execute. It may take a few minutes, be patient.
 
-    docker-compose up -d 
+    cd .. && docker-compose up -d 
 
 After a few moments your WordPress Application & Your Admin UI is ready to be configured.
 
