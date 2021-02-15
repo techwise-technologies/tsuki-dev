@@ -125,8 +125,8 @@ CADDYFILE=./caddy/Caddyfile
 CADDY_VERSION=2-prod
 
 # CloudFlare 
-CLOUDFLARE_EMAIL=email@yourdomain.com
-CLOUDFLARE_AUTH_TOKEN=cloudflare_api_token
+CLOUDFLARE_EMAIL=email@yourdomain.com       <------------ EDIT THIS
+CLOUDFLARE_AUTH_TOKEN=cloudflare_api_token  <------------ EDIT THIS
 
 # Nginx
 NGINX_CONF_DIR=./nginx/conf.d
@@ -138,25 +138,25 @@ NGINX_VERSION=prod
 TSUKI_PHP_CONF=./tsuki.ini
 
 # WordPress
-WORDPRESS_DB_PASSWORD=strong_password      <------------ EDIT THIS
+WORDPRESS_DB_PASSWORD=strong_password        <------------ EDIT THIS
 WORDPRESS_VERSION=php7.4           
-WORDPRESS_DB_NAME=yourdomain_com_wp        <------------ EDIT THIS   ## leave the trailing _wp 
-WORDPRESS_DB_USER=yourdomain_com           <------------ EDIT THIS      
+WORDPRESS_DB_NAME=yourdomain_com_wp          <------------ EDIT THIS   ## leave the trailing _wp 
+WORDPRESS_DB_USER=yourdomain_com             <------------ EDIT THIS      
 WORDPRESS_DATA_DIR=./wordpress
 WORDPRESS_TABLE_PREFIX=wp_
 WORDPRESS_DB_HOST=db
 
 # Redis
-REDIS_PASSWORD=very_very_strong_password   <------------ EDIT THIS
+REDIS_PASSWORD=very_very_strong_password      <------------ EDIT THIS
 REDIS_CONF=./redis/redis.conf
 REDIS_DATA_DIR=./redis/data/
 REDIS_VERSION=alpine
 
 # MariaDB
-MYSQL_ROOT_PASSWORD=very_strong_password    <------------ EDIT THIS 
-MYSQL_DATABASE=yourdomain_com_wp            <------------ EDIT THIS   ## leave the trailing _wp 
-MYSQL_PASSWORD=strong_password              <------------ EDIT THIS
-MYSQL_USER=yourdomain_com                   <------------ EDIT THIS
+MYSQL_ROOT_PASSWORD=very_strong_password      <------------ EDIT THIS 
+MYSQL_DATABASE=yourdomain_com_wp              <------------ EDIT THIS   ## leave the trailing _wp 
+MYSQL_PASSWORD=strong_password                <------------ EDIT THIS
+MYSQL_USER=yourdomain_com                     <------------ EDIT THIS
 DB_DATA_DIR=./mariadb
 MARIADB_VERSION=10.5
 
