@@ -1,26 +1,6 @@
 version: '3.7'
 
 services:
-  caddy:
-    container_name: Reverse_Proxy
-    image: techwise-technologies/caddy:${CADDY_VERSION}
-    build:
-      context: .
-      dockerfile: ./caddy/Dockerfile
-    volumes:
-      - ${CADDYFILE}:/etc/caddy/Caddyfile
-      - ${CADDY_DATA_DIR}:/data
-      - ${CADDY_CONF_DIR}:/config
-    environment:
-      - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL}
-      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_AUTH_TOKEN}
-      - ACME_AGREE=true
-    ports:
-      - "80:80"
-      - "443:443"
-    restart: unless-stopped
-    network_mode: "host"
-
   nginx:
     container_name: Web_Server
     image: techwise-technologies/nginx:${NGINX_VERSION}
@@ -37,9 +17,6 @@ services:
     depends_on:
       - wordpress
     restart: unless-stopped
-    networks:
-      tsuki_net:
-        ipv4_address: 172.18.1.1
 
   wordpress:
     container_name: WordPress
@@ -60,9 +37,6 @@ services:
     depends_on:
       - db
     restart: unless-stopped
-    networks:
-      tsuki_net:
-        ipv4_address: 172.18.1.2
 
   redis:
     container_name: DB_Cache
@@ -74,9 +48,6 @@ services:
     environment:
      - REDIS_REPLICATION_MODE=master
     restart: unless-stopped
-    networks:
-      tsuki_net:
-        ipv4_address: 172.18.1.3
 
   db:
     container_name: DB
@@ -89,27 +60,4 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
     restart: unless-stopped
-    networks:
-      tsuki_net:
-        ipv4_address: 172.18.1.4
 
-  portainer:
-    container_name: Dev_Panel
-    image: portainer/portainer-ce
-    volumes: 
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-    ports:
-      - "9000:9000"
-    restart: always
-
-networks:
-  tsuki_net:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.18.1.0/16
-
-volumes:
-  portainer_data: {}
